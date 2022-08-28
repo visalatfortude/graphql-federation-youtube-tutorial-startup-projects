@@ -4,7 +4,7 @@ import { LocationService } from './location.service';
 import { Location } from './entity/location.entity';
 import { CreateLocationInput } from './dto/create-location.input';
 import { UpdateLocationInput } from './dto/update-location.input';
-@Resolver()
+@Resolver((of) => Location)
 export class LocationResolver {
 
     constructor(private readonly locationService: LocationService) { }
@@ -32,5 +32,11 @@ export class LocationResolver {
     @Mutation(() => Location)
     removeLocation(@Args('id') id: string) {
         return this.locationService.remove(id);
+    }
+
+    @ResolveReference()
+    resolveReference(ref: {__typename:string,id:string}){
+        console.log("resolving location", ref.id);
+        return this.locationService.findOne(ref.id);
     }
 }

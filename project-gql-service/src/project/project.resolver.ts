@@ -3,6 +3,7 @@ import { ProjectService } from './project.service';
 import { Project } from './entity/project.entity';
 import { CreateProjectInput } from './dto/create-project.input';
 import { UpdateProjectInput } from './dto/update-project.input';
+import { ResolveReference } from '@nestjs/graphql';
 
 @Resolver(() => Project)
 export class ProjectResolver {
@@ -31,5 +32,10 @@ export class ProjectResolver {
   @Mutation(() => Project)
   removeProject(@Args('id') id: string) {
     return this.projectService.remove(id);
+  }
+
+  @ResolveReference()
+  resolvereference(ref: {__typename:string, id:string}){
+    return this.projectService.findOne(ref.id)
   }
 }

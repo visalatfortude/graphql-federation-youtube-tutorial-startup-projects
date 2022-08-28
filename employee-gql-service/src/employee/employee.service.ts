@@ -28,4 +28,12 @@ export class EmployeeService {
     async getProject(id: string) {
         // return this.projectService.findOne(id)
     }
+
+    async forProject(id:string){
+        return await  this.employeeRepository.find({"projectId": id})
+    }
+
+    async forLocation(id:string){
+        return await  this.employeeRepository.find({"locationId": id})
+    }
 }

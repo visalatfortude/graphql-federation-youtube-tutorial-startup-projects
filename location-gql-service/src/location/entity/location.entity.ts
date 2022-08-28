@@ -3,6 +3,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
 @Entity()
+@Directive('@key(fields: "id")')
 export class Location {
 
     @Field((type) => ID)

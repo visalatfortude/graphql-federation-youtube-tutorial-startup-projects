@@ -3,9 +3,10 @@ import { ProjectModule } from './project/project.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
+import { GraphQLFederationModule } from '@nestjs/graphql';
 
 @Module({
-  imports: [ProjectModule, GraphQLModule.forRoot(
+  imports: [ProjectModule, GraphQLFederationModule.forRoot(
     {
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql')
     }
@@ -14,9 +15,9 @@ import { join } from 'path';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'nairobi',
-      password: '1qazxsw2#',
-      database: 'employee',
+      username: 'postgres',
+      password: '123',
+      database: 'project-fed-db',
       entities: ["dist/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),],
